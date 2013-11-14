@@ -1,5 +1,5 @@
-(ns toxiclink.handler  
-  (:require [compojure.core :refer [defroutes]]            
+(ns toxiclink.handler
+  (:require [compojure.core :refer [defroutes]]
             [toxiclink.routes.home :refer [home-routes]]
             [noir.util.middleware :as middleware]
             [compojure.route :as route]
