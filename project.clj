@@ -30,6 +30,6 @@
    {:dependencies [[ring-mock "0.1.5"] [ring/ring-devel "1.2.1"]]}}
   :url "http://example.com/FIXME"
   :aot :all
-  :plugins [[lein-ring "0.8.7"]]
+  :plugins [[lein-ring "0.8.8"]]
   :description "FIXME: write description"
   :min-lein-version "2.0.0")
