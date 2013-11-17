@@ -2,6 +2,7 @@
   (:use compojure.core)
   (:require [toxiclink.views.layout :as layout]
             [toxiclink.util :as util]
+            [toxiclink.models.db :as db]
             [ring.util.response :refer [redirect-after-post]]))
 
 (defn home-page []
@@ -12,8 +13,9 @@
   (layout/render "about.html"))
 
 (defn shorten-url [url]
-  (comment do-something-here)
-  (redirect-after-post "/")) ;; todo: make this go to url info page
+  (let [saved-id (db/save-link [url])]
+    ;; todo: redirect to a full confirmation page with the short link
+    (str "We saved the link and got this back: " saved-id)))
 
 (defroutes home-routes
   (GET "/" [] (home-page))

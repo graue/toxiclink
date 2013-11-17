@@ -1,6 +1,7 @@
 (ns toxiclink.handler
   (:require [compojure.core :refer [defroutes]]
             [toxiclink.routes.home :refer [home-routes]]
+            [toxiclink.models.schema :as schema]
             [noir.util.middleware :as middleware]
             [compojure.route :as route]
             [taoensso.timbre :as timbre]
@@ -27,6 +28,8 @@
   (timbre/set-config!
     [:shared-appender-config :rotor]
     {:path "toxiclink.log" :max-size (* 512 1024) :backlog 10})
+
+  (if-not (schema/initialized?) (schema/create-tables))
   
   (timbre/info "toxiclink started successfully"))
 

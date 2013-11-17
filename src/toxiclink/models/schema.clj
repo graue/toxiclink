@@ -11,6 +11,7 @@
               :password ""
               :naming {:keys clojure.string/lower-case
                        :fields clojure.string/upper-case}})
+
 (defn initialized?
   "checks to see if the database schema is present"
   []
