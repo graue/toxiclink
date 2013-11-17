@@ -12,10 +12,10 @@
   the insert."
   [table]
   ;; FIXME: This method only works with H2. Postgres has a different way of
-  ;; doing it.
+  ;;        doing it. (sf 2013-11)
   (-> (select urls
               (fields [(raw "IDENTITY()") :id])
-              (limit 1)) ; FIXME: Don't know why needed.
+              (limit 1)) ; FIXME: Don't know why needed. (sf 2013-11)
                          ; H2 returns same ID multiple times, as many
                          ; occurrences as there are entries in the table. ???
       (first)

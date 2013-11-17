@@ -14,7 +14,8 @@
 
 (defn shorten-url [url]
   (let [saved-id (db/save-link [url])]
-    ;; todo: redirect to a full confirmation page with the short link
+    ;; TODO: redirect to a full confirmation page with the short link.
+    ;;       (sf 2013-11)
     (str "We saved the link and got this back: " saved-id)))
 
 (defroutes home-routes
