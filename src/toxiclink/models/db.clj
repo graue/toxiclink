@@ -5,20 +5,15 @@
 
 (defdb db schema/db-spec)
 
-(defentity users)
+(defentity url)
 
-(defn create-user [user]
-  (insert users
-          (values user)))
+(defn save-link [long-url]
+  (insert url
+          (values {:link long-url
+                   :timestamp (new java.util.Date)})))
 
-(defn update-user [id first-name last-name email]
-  (update users
-    (set-fields {:first_name first-name
-                 :last_name last-name
-                 :email email})
-    (where {:id id})))
 
-(defn get-user [id]
-  (first (select users
+(defn get-link [id]
+  (first (select url
                  (where {:id id})
                  (limit 1))))
