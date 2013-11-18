@@ -1,0 +1,8 @@
+{% extends "toxiclink/views/templates/base.html" %}
+{% block content %}
+<p>Here's your link:</p>
+<p><a href="{{short-link}}">{{short-link}}</a></p>
+<p>You can copy and paste this link and it will redirect to
+    <a href="{{input-link}}">your original link</a>. Enjoy!</p>
+<p><a href="/" class="btn btn-default">Shorten another</a></p>
+{% endblock %}
