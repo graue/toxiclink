@@ -3,6 +3,7 @@
   (:require [toxiclink.views.layout :as layout]
             [toxiclink.util :as util]
             [toxiclink.models.db :as db]
+            [compojure.route :refer [not-found]]
             [ring.util.response :refer [redirect redirect-after-post]]))
 
 (defn home-page []
@@ -23,8 +24,9 @@
                     :short-link (util/full-link (str "/" token))})))
 
 (defn redirect-to [token]
-  (let [link (db/get-link (util/token->id token))]
-    (redirect (:link link))))
+  (if-let [link (db/get-link (util/token->id token))]
+    (redirect (:link link))
+    (not-found "No such link!"))) ; TODO: render a 404 template. (sf 2013-11)
 
 (defroutes home-routes
   (GET "/" [] (home-page))
