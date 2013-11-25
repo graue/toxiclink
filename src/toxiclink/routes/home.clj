@@ -1,8 +1,8 @@
 (ns toxiclink.routes.home
-  (:use compojure.core)
   (:require [toxiclink.views.layout :as layout]
             [toxiclink.util :as util]
             [toxiclink.models.db :as db]
+            [compojure.core :refer [GET POST defroutes]]
             [compojure.route :refer [not-found]]
             [ring.util.response :refer [redirect redirect-after-post]]))
 

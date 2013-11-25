@@ -1,7 +1,7 @@
 (ns toxiclink.models.db
-  (:use korma.core
-        [korma.db :only (defdb transaction)])
-  (:require [toxiclink.models.schema :as schema]))
+  (:require [toxiclink.models.schema :as schema]
+            [korma.core :refer :all]
+            [korma.db :refer [defdb transaction]]))
 
 (defdb db schema/db-spec)
 

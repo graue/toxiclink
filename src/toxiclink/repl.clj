@@ -1,7 +1,8 @@
 (ns toxiclink.repl
-  (:use toxiclink.handler
-        ring.server.standalone
-        [ring.middleware file-info file]))
+  (:require [toxiclink.handler :as handler]
+            [ring.server.standalone :refer [serve]]
+            [ring.middleware.file :refer [wrap-file]]
+            [ring.middleware.file-info :refer [wrap-file-info]]))
 
 (defonce server (atom nil))
 
@@ -10,7 +11,7 @@
   ;; the server is forced to re-resolve the symbol in the var
   ;; rather than having its own copy. When the root binding
   ;; changes, the server picks it up without having to restart.
-  (-> #'app
+  (-> #'handler/app
     ; Makes static assets in $PROJECT_DIR/resources/public/ available.
     (wrap-file "resources")
     ; Content-Type, Content-Length, and Last Modified headers for files in body
@@ -23,9 +24,9 @@
     (reset! server
             (serve (get-handler)
                    {:port port
-                    :init init
+                    :init handler/init
                     :auto-reload? true
-                    :destroy destroy
+                    :destroy handler/destroy
                     :join? false}))
     (println (str "You can view the site at http://localhost:" port))))
 
