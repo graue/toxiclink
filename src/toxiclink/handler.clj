@@ -12,16 +12,13 @@
   (route/not-found "Not Found"))
 
 (defn init
-  "init will be called once when
-   app is deployed as a servlet on
-   an app server such as Tomcat
-   put any initialization code here"
+  "Called once when app is deployed as a servlet."
   []
   (timbre/set-config!
     [:appenders :rotor]
     {:min-level :info
      :enabled? true
-     :async? false ; should be always false for rotor
+     :async? false  ; Should be always false for rotor.
      :max-message-per-msecs nil
      :fn rotor/append})
   
@@ -34,19 +31,13 @@
   (timbre/info "toxiclink started successfully"))
 
 (defn destroy
-  "destroy will be called when your application
-   shuts down, put any clean up code here"
+  "Called when application shuts down."
   []
   (timbre/info "toxiclink is shutting down..."))
 
 (def app (middleware/app-handler
-           ;; add your application routes here
            [home-routes app-routes]
-           ;; add custom middleware here
            :middleware []
-           ;; add access rules here
            :access-rules []
-           ;; serialize/deserialize the following data formats
-           ;; available formats:
-           ;; :json :json-kw :yaml :yaml-kw :edn :yaml-in-html
+           ;; Serialize/deserialize the following data formats.
            :formats [:json-kw :edn]))
